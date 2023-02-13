@@ -39,6 +39,10 @@ function displayBooks() {
         const read = document.createElement("td");
         read.textContent = book.read;
         newBookRow.appendChild(read);
+
+        const remove = document.createElement("td");
+        remove.textContent = "\u{1F5D1}";
+        newBookRow.appendChild(remove);
     })
 }
 
@@ -55,7 +59,7 @@ addBookToLibrary(book4);
 const modal = document.getElementById("newBookModal");
 const add = document.getElementById("newBook");
 const closeButton = document.getElementsByClassName("close")[0];
-const submit = document.getElementById("submit");
+const submit = document.getElementById("addBook");
 
 add.addEventListener("click", ()=> {
     modal.style.display = "block";
@@ -70,9 +74,16 @@ submit.addEventListener("click", (e)=> {
     let title = document.getElementById("title").value;
     let author = document.getElementById("author").value;
     let pages = document.getElementById("pages").value;
-    let read = document.getElementById("read").value;
-    let book = new Book(title, author, pages, read);
+    let read = document.getElementById("read").checked;
+    let book;
+    console.log(read);
+    if (read) {
+        book = new Book(title, author, pages, "\u{2713}");
+    } else {
+        book = new Book(title, author, pages, "\u{2715}");
+    }
     addBookToLibrary(book);
+    modal.style.display = "none";
 })
 
 

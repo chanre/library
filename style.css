@@ -1,3 +1,15 @@
+#library {
+    border-spacing: 5em 1.5em;
+}
+
+#libraryHeader {
+    font-size: 36px;
+}
+
+#body {
+    font-size: 24px;
+}
+
 #newBookModal {
     display: none;
     position: absolute;
@@ -18,12 +30,8 @@
     border: 1px solid #888;
     width: 30%;
     height: 30%;
-}
-
-#textInput {
     display: flex;
-    flex-flow: column wrap;
-    width: 100%;
+    flex-direction: column;
     gap: 0.65em;
 }
 
