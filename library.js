@@ -21,6 +21,7 @@ function displayBooks() {
     myLibrary.forEach((book) => {
         console.log(book);
         const newBookRow = document.createElement("tr");
+        newBookRow.dataset.index = myLibrary.indexOf(book);
         newBookRow.classList.add('bookDetails');
         bookTable.appendChild(newBookRow);
 
@@ -41,10 +42,13 @@ function displayBooks() {
         newBookRow.appendChild(read);
 
         const remove = document.createElement("td");
-        remove.textContent = "\u{1F5D1}";
+        const trash = document.createElement("i");
+        trash.classList.add("remove");
+        trash.textContent = "\u{1F5D1}";
+        remove.appendChild(trash);
         newBookRow.appendChild(remove);
-    })
-}
+    });
+};
 
 const book1 = new Book("how to read", "john smith", "100", true);
 const book2 = new Book("how to not read", "jane doe", "10", false);
@@ -60,6 +64,7 @@ const modal = document.getElementById("newBookModal");
 const add = document.getElementById("newBook");
 const closeButton = document.getElementsByClassName("close")[0];
 const submit = document.getElementById("addBook");
+const remove = document.querySelectorAll(".remove");
 
 add.addEventListener("click", ()=> {
     modal.style.display = "block";
@@ -86,4 +91,10 @@ submit.addEventListener("click", (e)=> {
     modal.style.display = "none";
 })
 
-
+remove.forEach((td)=> {
+    td.addEventListener("click", (e)=> {
+        const index = td.parentElement.parentElement.dataset.index;
+        myLibrary.splice(index, 1);
+        displayBooks();
+    })
+})
