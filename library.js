@@ -19,7 +19,6 @@ function displayBooks() {
     bookTable = document.querySelector("#body");
     bookTable.textContent = "";
     myLibrary.forEach((book) => {
-        console.log(book);
         const newBookRow = document.createElement("tr");
         newBookRow.dataset.index = myLibrary.indexOf(book);
         newBookRow.classList.add('bookDetails');
@@ -38,15 +37,42 @@ function displayBooks() {
         newBookRow.appendChild(pages);
 
         const read = document.createElement("td");
-        read.textContent = book.read;
+        const check = document.createElement("i");
+        if (read) {
+            check.textContent = "\u{2713}";
+            check.classList.add("true");
+        } else {
+            check.textContent = "\u{2715}";
+            check.classList.add("false");
+        }
+        read.appendChild(check);
         newBookRow.appendChild(read);
+        check.addEventListener("click", ()=> {
+            const index = check.parentElement.parentElement.dataset.index;
+            if(myLibrary[index].read) {
+                myLibrary[index].read = false;
+                check.textContent = "\u{2715}";
+                check.className = "false";
+            } else {
+                myLibrary[index].read = true;
+                check.textContent = "\u{2713}";
+                check.className = "true";
+            }
+        });
 
         const remove = document.createElement("td");
-        const trash = document.createElement("i");
+        const trash = document.createElement("button");
         trash.classList.add("remove");
-        trash.textContent = "\u{1F5D1}";
+        trash.textContent = "Remove";
         remove.appendChild(trash);
         newBookRow.appendChild(remove);
+
+        trash.addEventListener("click", ()=> {
+            const index = trash.parentElement.parentElement.dataset.index;
+            myLibrary.splice(index, 1);
+            console.log("poop " + index);
+            displayBooks();
+        });
     });
 };
 
@@ -65,6 +91,7 @@ const add = document.getElementById("newBook");
 const closeButton = document.getElementsByClassName("close")[0];
 const submit = document.getElementById("addBook");
 const remove = document.querySelectorAll(".remove");
+const table = document.getElementById("body");
 
 add.addEventListener("click", ()=> {
     modal.style.display = "block";
@@ -80,21 +107,7 @@ submit.addEventListener("click", (e)=> {
     let author = document.getElementById("author").value;
     let pages = document.getElementById("pages").value;
     let read = document.getElementById("read").checked;
-    let book;
-    console.log(read);
-    if (read) {
-        book = new Book(title, author, pages, "\u{2713}");
-    } else {
-        book = new Book(title, author, pages, "\u{2715}");
-    }
+    let book = new Book(title, author, pages, read);
     addBookToLibrary(book);
     modal.style.display = "none";
-})
-
-remove.forEach((td)=> {
-    td.addEventListener("click", (e)=> {
-        const index = td.parentElement.parentElement.dataset.index;
-        myLibrary.splice(index, 1);
-        displayBooks();
-    })
 })

@@ -1,13 +1,58 @@
+@font-face {
+    font-family: Raleway;
+    src: url(Raleway-VariableFont_wght.ttf);
+}
+
+html {
+    font-family: Raleway, Helvetica, Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#newBook {
+    margin-top: 1rem;
+    width: 10rem;
+    height: 3rem;
+    font-size: 16px;
+    background-color: rgb(60, 143, 91);
+    border: none;
+    border-radius: 0.25rem;
+    color: white;
+}
+
+#newBook:hover {
+    background-color: rgb(46, 112, 71);
+}
+
 #library {
-    border-spacing: 5em 1.5em;
+    margin: 2em 0;
+}
+
+#library, th, td {
+    border-collapse: collapse;
+    padding: 0.5em;
+    text-align: center;
+    min-width: 4em;
+    height: 2em;
 }
 
 #libraryHeader {
     font-size: 36px;
+    padding: 10px;
+    background-color: #3E5279;
+    color: white;
 }
 
 #body {
-    font-size: 24px;
+    font-size: 20px;
+}
+
+tbody td {
+    border-bottom: dotted black 1px;
 }
 
 #newBookModal {
@@ -28,12 +73,34 @@
     margin: 15% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 30%;
-    height: 30%;
+    width: 20%;
+    height: 35%;
     display: flex;
     flex-direction: column;
     gap: 0.65em;
+    font-weight: bold;
 }
+
+#form input, #form button {
+    font-size: 16px;
+}
+
+#form button {
+    width: 50%;
+    height: 20%;
+    font-size: 20px;
+    align-self: center;
+    margin-top: 0.5em;
+    background-color: rgb(60, 143, 91);
+    color: white;
+    border-radius: 0.25rem;
+    border: none;
+}
+
+#form button:hover{
+    background-color: rgb(46, 112, 71);
+}
+
 
 #titleDiv {
     display:flex;
@@ -54,4 +121,32 @@
     color: black;
     text-decoration: none;
     cursor:pointer;
+}
+
+.remove {
+    width: 60%;
+    height: 70%;
+    font-size: 16px;
+    background-color: rgb(231, 57, 57);
+    color: white;
+    border-radius: 5px;
+    border: none;
+}
+
+.remove:hover {
+    background-color: rgb(206, 50, 50);
+}
+
+.true {
+    color: green;
+}
+
+.false {
+    color: red;
+}
+
+.true:hover,
+.false:hover,
+.remove:hover {
+    cursor: pointer;
 }
