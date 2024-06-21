@@ -85,6 +85,15 @@ function displayBooks() {
     });
 };
 
+function checkForm() {
+    const title = document.getElementById('title');
+    const author = document.getElementById('author');
+    const pages = document.getElementById('pages');
+    if (!title.checkValidity() || !author.checkValidity() || pages.checkValidity()) {
+        return false;
+    }
+}
+
 const book1 = new Book("how to read", "john smith", "100", true);
 const book2 = new Book("how to not read", "jane doe", "10", false);
 const book3 = new Book("where did all my money go?", "jack jackson", "300", true);
@@ -112,11 +121,15 @@ closeButton.addEventListener("click", ()=> {
 
 submit.addEventListener("click", (e)=> {
     e.preventDefault();
-    let title = document.getElementById("title").value;
-    let author = document.getElementById("author").value;
-    let pages = document.getElementById("pages").value;
-    let read = document.getElementById("read").checked;
-    let book = new Book(title, author, pages, read);
-    addBookToLibrary(book);
-    modal.style.display = "none";
+    if (!checkForm()) {
+        alert('Please correct your inputs.');
+    } else {
+        let title = document.getElementById("title").value;
+        let author = document.getElementById("author").value;
+        let pages = document.getElementById("pages").value;
+        let read = document.getElementById("read").checked;
+        let book = new Book(title, author, pages, read);
+        addBookToLibrary(book);
+        modal.style.display = "none";
+    }
 })
